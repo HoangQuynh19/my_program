@@ -17,5 +17,5 @@ char* trim_right(const char* a)
 }
 int main()
 {
-    cout<<trim_right("garyyh     ");
+    cout<<trim_right("sdgh     ");
 }
