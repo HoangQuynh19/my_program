@@ -1,4 +1,4 @@
-#include"dino.h"
+#include"Object.h"
 
 Dino::Dino()
 {
@@ -75,3 +75,4 @@ void Cactus::Render(LTexture& gCactus,SDL_Renderer* gRenderer)
 {
     gCactus.render(PosX,PosY,gRenderer,NULL);
 }
+

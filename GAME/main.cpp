@@ -1,4 +1,4 @@
-#include"dino.h"
+#include"Object.h"
 
 SDL_Renderer* gRenderer=NULL;
 SDL_Window* gWindow=NULL;
@@ -65,7 +65,7 @@ bool loadMedia(SDL_Renderer* gRenderer)
 
 	return success;
 }
-int main()
+int main(int argc, char* args[])
 {
     if( !init() )
 	{
