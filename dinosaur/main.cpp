@@ -65,7 +65,7 @@ bool loadMedia(SDL_Renderer* gRenderer)
 
 	return success;
 }
-int main()
+int main(int argc, char* args[])
 {
     if( !init() )
 	{
