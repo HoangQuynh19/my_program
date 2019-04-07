@@ -91,7 +91,7 @@ bool GameOver()
         int x=Cactus2.getPosX();
         int y=Dino.getPosy();
 
-        Cactus1.End(x);
+        Cactus2.End(x);
         Cactus1.End(x-600);
 
         Dino.End(y);
