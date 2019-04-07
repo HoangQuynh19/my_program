@@ -54,6 +54,7 @@ void Dino::End(int y)
     altitude=0;
     gravity=0;
 }
+
 // BARRIER
 Cactus::Cactus(int x,int y)
 {

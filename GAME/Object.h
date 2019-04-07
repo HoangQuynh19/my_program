@@ -28,6 +28,7 @@ public:
     int getPosX();
     int getPosy();
     void End(int y);
+
 };
 
 class Cactus

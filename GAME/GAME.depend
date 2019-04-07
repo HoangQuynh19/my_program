@@ -22,3 +22,20 @@
 1554602592 e:\ltnc\project\game\general.h
 	"Object.h"
 
+1554614022 source:c:\users\dell\my_program\game\loadtexture.cpp
+	"loadTexture.h"
+
+1554607639 c:\users\dell\my_program\game\loadtexture.h
+	<SDL.h>
+	<SDL_image.h>
+	<string>
+
+1554633652 source:c:\users\dell\my_program\game\main.cpp
+	"Object.h"
+
+1554633620 c:\users\dell\my_program\game\object.h
+	"loadTexture.h"
+
+1554633624 source:c:\users\dell\my_program\game\object.cpp
+	"Object.h"
+

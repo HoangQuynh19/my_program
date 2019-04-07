@@ -10,6 +10,7 @@ LTexture gBackground;
 LTexture gDino;
 LTexture gCactus;
 LTexture gPlay;
+LTexture gameOver;
 
 Dino Dino;
 Cactus Cactus1(SCREEN_WIDTH,POSY_BEGIN_CACTUS);
@@ -34,45 +35,88 @@ bool loadMedia()
 
 	return success;
 }
-void event(SDL_Event& e)
+
+bool GameOver()
+{   bool end=false;
+    if( Cactus1.getPosX()-Dino.getPosX()<=118 && Cactus1.getPosX()> Dino.getPosX()&&Dino.getPosy()>300)
+    {
+        gameOver.loadTexture("GameOver.jpg",gRenderer);
+        gameOver.render( ( SCREEN_WIDTH-gameOver.getWidth() )/2 ,( SCREEN_HEIGHT-gameOver.getHeight() ) /2 , gRenderer,NULL );
+
+        int x=Cactus1.getPosX();
+        int y=Dino.getPosy();
+        Dino.End(y);
+        Cactus1.End(x);
+        Cactus2.End(x+600);
+        end=true;
+
+    } else gameOver.free();
+
+    if ( Dino.getPosX()- Cactus1.getPosX()<=50 && Cactus1.getPosX()< Dino.getPosX() && Dino.getPosy()>300 )
+    {
+        gameOver.loadTexture("GameOver.jpg",gRenderer);
+        gameOver.render( ( SCREEN_WIDTH-gameOver.getWidth() )/2 ,( SCREEN_HEIGHT-gameOver.getHeight() ) /2 , gRenderer,NULL );
+
+        int x=Cactus1.getPosX();
+        int y=Dino.getPosy();
+
+        Cactus1.End(x);
+        Cactus2.End(x+600);
+
+        Dino.End(y);
+        end=true;
+
+    } else gameOver.free();
+
+    if( Cactus2.getPosX()-Dino.getPosX()<=118 && Cactus2.getPosX()> Dino.getPosX()&&Dino.getPosy()>300)
+    {
+        gameOver.loadTexture("GameOver.jpg",gRenderer);
+        gameOver.render( ( SCREEN_WIDTH-gameOver.getWidth() )/2 ,( SCREEN_HEIGHT-gameOver.getHeight() ) /2 , gRenderer,NULL );
+
+        int x=Cactus2.getPosX();
+
+        Cactus2.End(x);
+        Cactus1.End(x-600);
+        int y=Dino.getPosy();
+        Dino.End(y);
+        end=true;
+
+    } else gameOver.free();
+
+    if ( Dino.getPosX()- Cactus2.getPosX()<=53 && Cactus2.getPosX()< Dino.getPosX() && Dino.getPosy()>300 )
+    {
+        gameOver.loadTexture("GameOver.jpg",gRenderer);
+        gameOver.render( ( SCREEN_WIDTH-gameOver.getWidth() )/2 ,( SCREEN_HEIGHT-gameOver.getHeight() ) /2 , gRenderer,NULL );
+
+        int x=Cactus2.getPosX();
+        int y=Dino.getPosy();
+
+        Cactus1.End(x);
+        Cactus1.End(x-600);
+
+        Dino.End(y);
+        end=true;
+
+    } else gameOver.free();
+    return end;
+}
+void event(SDL_Event& e,bool&quit)
 {
     Cactus1.handleEvent(gPlay,e);
     Cactus2.handleEvent(gPlay,e);
     Dino.handleEvent(e);
-}
-void GameOver()
-{
-    if( Cactus1.getPosX()-Dino.getPosX()<=118 && Cactus1.getPosX()> Dino.getPosX()&&Dino.getPosy()>304)
-        {
-            int x=Cactus1.getPosX();
-            Cactus1.End(x);
-            Cactus2.End(x+600);
 
-        }
-        if ( Dino.getPosX()- Cactus1.getPosX()<=50 && Cactus1.getPosX()< Dino.getPosX() && Dino.getPosy()>304 )
+    if (GameOver()==true){
+        if( e.type == SDL_KEYDOWN )
         {
-            int x=Cactus1.getPosX();
-            int y=Dino.getPosy();
-            Cactus1.End(x);
-            Dino.End(y);
-            Cactus2.End(x+600);
+            switch( e.key.keysym.sym )
+            {
+                case SDLK_n: quit==true;
+            }
         }
-        if( Cactus2.getPosX()-Dino.getPosX()<=118 && Cactus2.getPosX()> Dino.getPosX()&&Dino.getPosy()>304)
-        {
-            int x=Cactus2.getPosX();
-            Cactus2.End(x);
-            Cactus1.End(x-600);
-
-        }
-        if ( Dino.getPosX()- Cactus2.getPosX()<=50 && Cactus2.getPosX()< Dino.getPosX() && Dino.getPosy()>304 )
-        {
-            int x=Cactus2.getPosX();
-            int y=Dino.getPosy();
-            Cactus1.End(x);
-            Dino.End(y);
-            Cactus1.End(x-600);
-        }
+    }
 }
+
 void Render(int& scrollingOffset)
 {
     --scrollingOffset;
@@ -115,19 +159,21 @@ int main(int argc, char* args[])
             if( e.type == SDL_QUIT )
             {
                 quit = true;
+
             }
-            event(e);
+            event(e,quit);
+
         }
         Cactus1.move();
         Cactus2.move();
         Dino.jump();
 
-        GameOver();
+
 
         SDL_RenderClear( gRenderer );
 
         Render(scrollingOffset);
-
+        GameOver();
         SDL_RenderPresent( gRenderer );
     }
     close();
