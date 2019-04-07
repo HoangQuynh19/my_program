@@ -1,17 +1,10 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
-#include"loadTexture.h"
+#include "loadTexture.h"
 
 const int SCREEN_WIDTH = 1000;
 const int SCREEN_HEIGHT = 500;
-
-const int POSX_BEGIN_DINO = 120;
-const int POSY_BEGIN_DINO = 305;
-
-const int POSY_BEGIN_CACTUS = 265;
-
-int VELX_C =7;
 
 #define J_HEIGHT 19
 #define J_GLAVITY 1
@@ -23,10 +16,18 @@ private:
     int altitude;
     int gravity;
 public:
+    static const int POSX_BEGIN_DINO = 120;
+    static const int POSY_BEGIN_DINO = 345;
     Dino();
     void handleEvent( SDL_Event&e );
+
     void jump();
-    void Render(LTexture& gDino,SDL_Renderer* gRenderer);
+
+    void Render(LTexture& gDino,SDL_Renderer* gRenderer);//,SDL_Rect gDinoClips[4]);
+
+    int getPosX();
+    int getPosy();
+    void End(int y);
 };
 
 class Cactus
@@ -34,17 +35,22 @@ class Cactus
 private:
     int PosX, PosY;
     int VelX;
+    int VELX_C;
 public:
     static const int WIDTH_CACTUS=80;
 
-    Cactus();
+    Cactus(int x,int y);
 
     void handleEvent(LTexture& gPlay, SDL_Event&e );
 
     void move();
 
     void Render(LTexture& gCactus,SDL_Renderer* gRenderer);
+
+    int getPosX();
+    int getPosy();
+    void End(int x);
 };
 
-void loadMedia();
+
 #endif // OBJECT_H

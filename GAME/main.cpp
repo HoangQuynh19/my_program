@@ -1,14 +1,138 @@
-#include"Object.h"
+#include "Object.h"
 
 SDL_Renderer* gRenderer=NULL;
 SDL_Window* gWindow=NULL;
+
+const char WINDOW_TITLE[]="DINOSAUR";
+const int POSY_BEGIN_CACTUS = 300;
 
 LTexture gBackground;
 LTexture gDino;
 LTexture gCactus;
 LTexture gPlay;
 
-const char WINDOW_TITLE[]="GAME";
+Dino Dino;
+Cactus Cactus1(SCREEN_WIDTH,POSY_BEGIN_CACTUS);
+Cactus Cactus2(SCREEN_WIDTH+600,POSY_BEGIN_CACTUS);
+
+SDL_Rect gDinoClips[4];
+
+bool init();
+void close();
+
+bool loadMedia()
+{
+	bool success = true;
+
+	if (gBackground.loadTexture("background.jpg",gRenderer)==NULL) success = false;
+
+    if (gCactus.loadTexture("barrier1.gif",gRenderer)==NULL) success = false ;
+
+    if (gDino.loadTexture("dinosaur.png",gRenderer)==NULL) success = false;
+
+    if (gPlay.loadTexture("Play.png",gRenderer)==NULL) success = false;
+
+	return success;
+}
+void event(SDL_Event& e)
+{
+    Cactus1.handleEvent(gPlay,e);
+    Cactus2.handleEvent(gPlay,e);
+    Dino.handleEvent(e);
+}
+void GameOver()
+{
+    if( Cactus1.getPosX()-Dino.getPosX()<=118 && Cactus1.getPosX()> Dino.getPosX()&&Dino.getPosy()>304)
+        {
+            int x=Cactus1.getPosX();
+            Cactus1.End(x);
+            Cactus2.End(x+600);
+
+        }
+        if ( Dino.getPosX()- Cactus1.getPosX()<=50 && Cactus1.getPosX()< Dino.getPosX() && Dino.getPosy()>304 )
+        {
+            int x=Cactus1.getPosX();
+            int y=Dino.getPosy();
+            Cactus1.End(x);
+            Dino.End(y);
+            Cactus2.End(x+600);
+        }
+        if( Cactus2.getPosX()-Dino.getPosX()<=118 && Cactus2.getPosX()> Dino.getPosX()&&Dino.getPosy()>304)
+        {
+            int x=Cactus2.getPosX();
+            Cactus2.End(x);
+            Cactus1.End(x-600);
+
+        }
+        if ( Dino.getPosX()- Cactus2.getPosX()<=50 && Cactus2.getPosX()< Dino.getPosX() && Dino.getPosy()>304 )
+        {
+            int x=Cactus2.getPosX();
+            int y=Dino.getPosy();
+            Cactus1.End(x);
+            Dino.End(y);
+            Cactus1.End(x-600);
+        }
+}
+void Render(int& scrollingOffset)
+{
+    --scrollingOffset;
+    if( scrollingOffset < -gBackground.getWidth() )
+    {
+        scrollingOffset = 0;
+    }
+
+    gBackground.render( scrollingOffset, 0,gRenderer,NULL );
+    gBackground.render( scrollingOffset + gBackground.getWidth(), 0 ,gRenderer,NULL );
+
+    gPlay.render( ( SCREEN_WIDTH-gPlay.getWidth() )/2 ,( SCREEN_HEIGHT-gPlay.getHeight() ) /2 , gRenderer,NULL );
+
+    Cactus1.Render( gCactus,gRenderer );
+    Cactus2.Render( gCactus,gRenderer );
+
+    Dino.Render( gDino,gRenderer );
+}
+
+int main(int argc, char* args[])
+{
+    if( !init() )
+	{
+		return -1;
+	}
+	if( !loadMedia() )
+    {
+        return -1;
+    }
+    SDL_Event e;
+    bool quit=false;
+
+    int scrollingOffset = 0;
+
+
+    while(!quit)
+    {
+        while(SDL_PollEvent(&e)!=0)
+        {
+            if( e.type == SDL_QUIT )
+            {
+                quit = true;
+            }
+            event(e);
+        }
+        Cactus1.move();
+        Cactus2.move();
+        Dino.jump();
+
+        GameOver();
+
+        SDL_RenderClear( gRenderer );
+
+        Render(scrollingOffset);
+
+        SDL_RenderPresent( gRenderer );
+    }
+    close();
+    return 0;
+}
 
 bool init(){
     bool success = true;
@@ -50,61 +174,4 @@ void close()
 
 	IMG_Quit();
 	SDL_Quit();
-}
-bool loadMedia(SDL_Renderer* gRenderer)
-{
-	bool success = true;
-
-	if (gBackground.loadTexture("background.jpg",gRenderer)==NULL) success = false;
-
-    if (gCactus.loadTexture("barrier1.gif",gRenderer)==NULL) success = false ;
-
-    if (gDino.loadTexture("dinosaur.png",gRenderer)==NULL) success = false;
-
-    if (gPlay.loadTexture("Play.png",gRenderer)==NULL) success = false;
-
-	return success;
-}
-int main(int argc, char* args[])
-{
-    if( !init() )
-	{
-		return -1;
-	}
-	if( !loadMedia(gRenderer) )
-    {
-        return -1;
-    }
-
-    Dino Dino;
-    Cactus Cactus;
-
-    SDL_Event e;
-    bool quit=false;
-    while(!quit)
-    {
-        while(SDL_PollEvent(&e)!=0)
-        {
-            if( e.type == SDL_QUIT )
-            {
-                quit = true;
-            }
-            Cactus.handleEvent(gPlay,e);
-            Dino.handleEvent(e);
-
-        }
-        Cactus.move();
-        Dino.jump();
-
-        SDL_RenderClear( gRenderer );
-
-        gBackground.render(0,0,gRenderer,NULL);
-        gPlay.render(SCREEN_WIDTH/2-90,70,gRenderer,NULL);
-        Cactus.Render(gCactus,gRenderer);
-        Dino.Render(gDino,gRenderer);
-
-        SDL_RenderPresent( gRenderer );
-    }
-    close();
-    return 0;
 }

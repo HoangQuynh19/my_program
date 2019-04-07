@@ -15,7 +15,7 @@ class LTexture
 
 		void free();
 
-		void render( int x, int y, SDL_Renderer* gRenderer,SDL_Rect* clip = NULL );
+		void render( int x, int y, SDL_Renderer* gRenderer,SDL_Rect* clip );
 
 		int getWidth();
 		int getHeight();

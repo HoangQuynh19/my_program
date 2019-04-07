@@ -1,4 +1,4 @@
-#include"Object.h"
+#include "Object.h"
 
 Dino::Dino()
 {
@@ -35,16 +35,33 @@ void Dino::jump()
 }
 void Dino::Render(LTexture& gDino,SDL_Renderer* gRenderer)
 {
-    gDino.render(PosX,PosY,gRenderer,NULL);
+
+    gDino.render( PosX , PosY,gRenderer,NULL );
+
 }
 
-// BARRIER
-Cactus::Cactus()
+int Dino::getPosX()
 {
-    PosX = SCREEN_WIDTH;
-    PosY = POSY_BEGIN_CACTUS;
+    return PosX;
+}
+int Dino::getPosy()
+{
+    return PosY;
+}
+void Dino::End(int y)
+{
+    PosY=y;
+    altitude=0;
+    gravity=0;
+}
+// BARRIER
+Cactus::Cactus(int x,int y)
+{
+    PosX = x;
+    PosY = y;
 
     VelX = 0;
+    VELX_C=6;
 }
 
 void Cactus::handleEvent(LTexture& gPlay,SDL_Event& e)
@@ -57,6 +74,17 @@ void Cactus::handleEvent(LTexture& gPlay,SDL_Event& e)
             {
             VelX -= VELX_C;
             gPlay.free();
+            break;
+            }
+        }
+    }
+    if(e.type == SDL_KEYDOWN && e.key.repeat >= 0)
+    {
+        switch( e.key.keysym.sym )
+        {
+            case SDLK_p:
+            {
+             VELX_C=0;
             break;
             }
         }
@@ -75,4 +103,16 @@ void Cactus::Render(LTexture& gCactus,SDL_Renderer* gRenderer)
 {
     gCactus.render(PosX,PosY,gRenderer,NULL);
 }
-
+int Cactus::getPosX()
+{
+    return PosX;
+}
+int Cactus::getPosy()
+{
+    return PosY;
+}
+void Cactus::End(int x)
+{
+    PosX=x;
+    VelX=0;
+}

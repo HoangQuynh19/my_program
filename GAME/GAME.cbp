@@ -31,6 +31,11 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Object.cpp" />
+		<Unit filename="Object.h" />
+		<Unit filename="loadTexture.cpp" />
+		<Unit filename="loadTexture.h" />
+		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

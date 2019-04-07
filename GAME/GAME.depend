@@ -1,18 +1,24 @@
 # depslib dependency file v1.0
-1554481853 source:e:\ltnc\project\game\loadtexture.cpp
+1554610091 source:e:\ltnc\project\game\loadtexture.cpp
 	"loadTexture.h"
 
-1554481815 e:\ltnc\project\game\loadtexture.h
+1554607639 e:\ltnc\project\game\loadtexture.h
 	<SDL.h>
 	<SDL_image.h>
 	<string>
 
-1554560668 source:e:\ltnc\project\game\main.cpp
+1554611261 source:e:\ltnc\project\game\main.cpp
 	"Object.h"
 
-1554560557 e:\ltnc\project\game\object.h
+1554610410 e:\ltnc\project\game\object.h
 	"loadTexture.h"
 
-1554560663 source:e:\ltnc\project\game\object.cpp
+1554610329 source:e:\ltnc\project\game\object.cpp
+	"Object.h"
+
+1554602592 source:e:\ltnc\project\game\general.cpp
+	"General.h"
+
+1554602592 e:\ltnc\project\game\general.h
 	"Object.h"
 

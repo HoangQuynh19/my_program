@@ -1,4 +1,4 @@
-#include"loadTexture.h"
+#include "loadTexture.h"
 
 LTexture::LTexture()
 {
@@ -25,7 +25,7 @@ bool LTexture::loadTexture( std::string path,SDL_Renderer* gRenderer )
 	}
 	else
 	{
-		SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0xff, 0xff, 0xff) );
+		SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0xfd, 0xfd, 0xfd) );
 
         newTexture = SDL_CreateTextureFromSurface( gRenderer, loadedSurface );
 		if( newTexture == NULL )
