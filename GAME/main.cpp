@@ -1,27 +1,28 @@
 #include "Object.h"
-
+#include "Barrier.h"
+#include "GameOver.h"
 SDL_Renderer* gRenderer=NULL;
 SDL_Window* gWindow=NULL;
 
 const char WINDOW_TITLE[]="DINOSAUR";
 const int POSY_BEGIN_CACTUS = 300;
 
-#define limit_left 115
-#define limit_right 45
-#define limit_above 300
-
 LTexture gBackground;
 LTexture gDino;
 LTexture gCactus;
-//LTexture gBarrier;
+LTexture gBarrier;
 LTexture gPlay;
 LTexture gameOver;
 
 Dino Dino;
-Cactus Cactus1(SCREEN_WIDTH,POSY_BEGIN_CACTUS);
-Cactus Cactus2(SCREEN_WIDTH+SCREEN_WIDTH/2,POSY_BEGIN_CACTUS);
-//Cactus Barrier(SCREEN_WIDTH+SCREEN_WIDTH/6,POSY_BEGIN_CACTUS);
-SDL_Rect gDinoClips[4];
+#define posxCactus2 1550
+#define posxBarrier2 1800
+
+Barrier Cactus1(SCREEN_WIDTH,POSY_BEGIN_CACTUS);
+Barrier Cactus2(posxCactus2,POSY_BEGIN_CACTUS);
+
+Barrier BARRIER1(SCREEN_WIDTH+SCREEN_WIDTH/4,396);
+Barrier BARRIER2(posxBarrier2,396);
 
 bool init();
 void close();
@@ -38,73 +39,10 @@ bool loadMedia()
 
     if (gPlay.loadTexture("Play.png",gRenderer) == NULL ) success = false;
 
- //   if (gBarrier.loadTexture("barrier2.gif",gRenderer) == NULL ) success =false;
+   if (gBarrier.loadTexture("barrier2.gif",gRenderer)== NULL ) success = false;
+
 	return success;
 }
-
-bool GameOver()
-{   bool end=false;
-
-    int distance_left1 = Cactus1.getPosX()-Dino.getPosX();
-    int distance_right1 = Dino.getPosX()- Cactus1.getPosX();
-    int distance_left2 = Cactus2.getPosX()-Dino.getPosX();
-    int distance_right2 = Dino.getPosX()- Cactus2.getPosX();
-
-    if( distance_left1 <= limit_left && Dino.getPosy() > limit_above && Cactus1.getPosX()> Dino.getPosX())
-    {
-        int x=Cactus1.getPosX();
-        int y=Dino.getPosy();
-
-        Dino.End(y);
-        Cactus1.End(x);
-        Cactus2.End(x+SCREEN_WIDTH/2);
-
-        end=true;
-    }
-
-    if ( distance_right1 <= limit_right && Dino.getPosy() > limit_above && Cactus1.getPosX()< Dino.getPosX() )
-    {
-        int x=Cactus1.getPosX();
-        int y=Dino.getPosy();
-
-        Cactus1.End(x);
-        Cactus2.End(x+SCREEN_WIDTH/2);
-        Dino.End(y);
-        end=true;
-    }
-
-    if( distance_left2 <= limit_left && Dino.getPosy() > limit_above && Cactus2.getPosX()> Dino.getPosX())
-    {
-        int x=Cactus2.getPosX();
-        int y=Dino.getPosy();
-
-        Cactus2.End(x);
-        Cactus1.End(x-SCREEN_WIDTH/2);
-        Dino.End(y);
-
-         end=true;
-    }
-
-    if ( distance_right2 <= limit_right && Dino.getPosy() > limit_above && Cactus2.getPosX()< Dino.getPosX())
-    {
-        int x=Cactus2.getPosX();
-        int y=Dino.getPosy();
-
-        Cactus2.End(x);
-        Cactus1.End(x-SCREEN_WIDTH/2);
-        Dino.End(y);
-
-        end=true;
-    }
-    if (end == true)
-    {
-    gameOver.loadTexture("GameOver.jpg",gRenderer);
-    gameOver.render( ( SCREEN_WIDTH-gameOver.getWidth() )/2 ,( SCREEN_HEIGHT-gameOver.getHeight() ) /2 , gRenderer,NULL );
-    }
-    else gameOver.free();
-    return end;
-}
-
 
 void Render(int& scrollingOffset)
 {
@@ -119,10 +57,22 @@ void Render(int& scrollingOffset)
 
     gPlay.render( ( SCREEN_WIDTH-gPlay.getWidth() )/2 ,( SCREEN_HEIGHT-gPlay.getHeight() ) /2 , gRenderer,NULL );
 
+
+
     Cactus1.Render( gCactus,gRenderer );
     Cactus2.Render( gCactus,gRenderer );
- //   Barrier.Render(gBarrier,gRenderer);
+
+    if(Cactus1.getPosX()< Dino.getPosX()||( Cactus1.getPosX()> Dino.getPosX()&& Cactus1.getPosX() - Dino.getPosX() >700 ))
+    {
+        BARRIER1.Render(gBarrier,gRenderer);
+    }
+
+    if (Cactus2.getPosX()< Dino.getPosX()||( Cactus2.getPosX()> Dino.getPosX()&& Cactus2.getPosX() - Dino.getPosX() >700 ))
+    {
+        BARRIER2.Render(gBarrier,gRenderer);
+    }
     Dino.Render( gDino,gRenderer );
+
 }
 
 int main(int argc, char* args[])
@@ -147,18 +97,22 @@ int main(int argc, char* args[])
             }
             Cactus1.handleEvent(gPlay,e);
             Cactus2.handleEvent(gPlay,e);
-         //   Barrier.handleEvent(gPlay,e);
+            BARRIER1.handleEvent(gPlay,e);
+            BARRIER2.handleEvent(gPlay,e);
             Dino.handleEvent(e);
         }
-        Cactus1.move();
-        Cactus2.move();
-     //   Barrier.move();
+        Cactus1.move(gCactus);
+        Cactus2.move(gCactus);
+        BARRIER1.move(gBarrier);
+        BARRIER2.move(gBarrier);
+
         Dino.jump();
 
         SDL_RenderClear( gRenderer );
 
         Render(scrollingOffset);
-        GameOver();
+
+        GameOver(Dino, Cactus1,Cactus2,BARRIER1,BARRIER2,gRenderer,gameOver);
         SDL_RenderPresent( gRenderer );
     }
     close();

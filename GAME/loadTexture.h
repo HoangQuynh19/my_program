@@ -1,9 +1,12 @@
-#ifndef LOADTEXTURE_H
-#define LOADTEXTURE_H
+#ifndef LOADTEXTURE_H_
+#define LOADTEXTURE_H_
 
 #include <SDL.h>
 #include <SDL_image.h>
 #include <string>
+
+const int SCREEN_WIDTH = 1000;
+const int SCREEN_HEIGHT = 500;
 
 class LTexture
 {
@@ -29,4 +32,4 @@ class LTexture
 };
 
 
-#endif // LOADTEXTURE_H
+#endif // LOADTEXTURE_H_

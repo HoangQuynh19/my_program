@@ -78,5 +78,3 @@ int LTexture::getHeight()
 {
 	return mHeight;
 }
-
-

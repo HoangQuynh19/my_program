@@ -22,20 +22,36 @@
 1554602592 e:\ltnc\project\game\general.h
 	"Object.h"
 
-1555088427 source:c:\users\dell\my_program\game\loadtexture.cpp
+1555142657 source:c:\users\dell\my_program\game\loadtexture.cpp
 	"loadTexture.h"
 
-1555088427 c:\users\dell\my_program\game\loadtexture.h
+1555139173 c:\users\dell\my_program\game\loadtexture.h
 	<SDL.h>
 	<SDL_image.h>
 	<string>
 
-1555129168 source:c:\users\dell\my_program\game\main.cpp
+1555143690 source:c:\users\dell\my_program\game\main.cpp
 	"Object.h"
+	"Barrier.h"
+	"GameOver.h"
 
-1555088427 c:\users\dell\my_program\game\object.h
+1555139719 c:\users\dell\my_program\game\object.h
 	"loadTexture.h"
 
-1555122359 source:c:\users\dell\my_program\game\object.cpp
+1555142657 source:c:\users\dell\my_program\game\object.cpp
 	"Object.h"
+
+1555139173 c:\users\dell\my_program\game\barrier.h
+	"loadTexture.h"
+
+1555142657 source:c:\users\dell\my_program\game\barrier.cpp
+	"Barrier.h"
+
+1555143449 source:c:\users\dell\my_program\game\gameover.cpp
+	"GameOver.h"
+
+1555142908 c:\users\dell\my_program\game\gameover.h
+	"loadTexture.h"
+	"Object.h"
+	"Barrier.h"
 
