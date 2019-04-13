@@ -77,6 +77,10 @@ void Cactus::handleEvent(LTexture& gPlay,SDL_Event& e)
             gPlay.free();
             break;
             }
+            case SDLK_y:
+            {
+                VELX_C=7;
+            }
         }
     }
     if(e.type == SDL_KEYDOWN && e.key.repeat >= 0)
