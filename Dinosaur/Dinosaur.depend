@@ -2,35 +2,36 @@
 1555758515 source:f:\dinosaur\texture.cpp
 	"Texture.h"
 
-1555814824 f:\dinosaur\texture.h
+1556092406 f:\dinosaur\texture.h
 	<SDL.h>
 	<SDL_image.h>
 	<string>
 
-1555949159 source:f:\dinosaur\dino.cpp
+1556092898 source:f:\dinosaur\dino.cpp
 	"Dino.h"
 
-1555934733 f:\dinosaur\dino.h
+1556093287 f:\dinosaur\dino.h
 	"Texture.h"
 	<SDL_mixer.h>
 
-1555949159 source:f:\dinosaur\obstacle.cpp
+1556092643 source:f:\dinosaur\obstacle.cpp
 	"Obstacle.h"
 
-1555814557 f:\dinosaur\obstacle.h
+1556093286 f:\dinosaur\obstacle.h
 	"Texture.h"
+	<iostream>
 
-1556076852 source:f:\dinosaur\main.cpp
+1556092198 source:f:\dinosaur\main.cpp
 	"Dino.h"
 	"Obstacle.h"
 	"Synthesis.h"
 	"Texture.h"
 	"GameOver.h"
 
-1555949159 source:f:\dinosaur\synthesis.cpp
+1556090366 source:f:\dinosaur\synthesis.cpp
 	"Synthesis.h"
 
-1555822018 f:\dinosaur\synthesis.h
+1556092406 f:\dinosaur\synthesis.h
 	"Texture.h"
 	"Dino.h"
 	"Obstacle.h"
@@ -38,7 +39,7 @@
 1556076844 source:f:\dinosaur\gameover.cpp
 	"GameOver.h"
 
-1556076843 f:\dinosaur\gameover.h
+1556092406 f:\dinosaur\gameover.h
 	"Texture.h"
 	"Obstacle.h"
 	"Dino.h"

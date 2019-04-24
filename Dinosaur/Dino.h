@@ -1,10 +1,10 @@
-#ifndef DINO_H_
-#define DINO_H_
+#ifndef DINO_H
+#define DINO_H
 
 #include "Texture.h"
 #include <SDL_mixer.h>
 
-#define HEIGHT 20
+#define HEIGHT 21
 #define GLAVITY 1
 
 class Dino
@@ -16,9 +16,10 @@ private:
     Mix_Chunk* Sound_jump;
 public:
     static const int POSX_BEGIN_DINO = 120;
-    static const int POSY_BEGIN_DINO = 345;
+    static const int POSY_BEGIN_DINO = 340;
 
     Dino();
+
     void handleEvent( SDL_Event&e, bool& press );
 
     void jump(int &frame);
@@ -27,6 +28,7 @@ public:
 
     int getPosX();
     int getPosy();
+
     void End(int y);
 
 };

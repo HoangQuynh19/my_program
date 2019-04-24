@@ -6,7 +6,9 @@ Obstacle::Obstacle(int x,int y)
     PosY = y;
 
     VelX = 0;
-    VELX_C=6;
+    VELX_C=7;
+
+    accelerate=0;
 
 }
 
@@ -23,7 +25,7 @@ void Obstacle::handleEvent( SDL_Event& e)
             }
         }
     }
-    if(e.type == SDL_KEYDOWN && e.key.repeat >= 0)
+    if(e.type == SDL_KEYDOWN )
     {
         switch( e.key.keysym.sym )
         {
@@ -42,7 +44,15 @@ void Obstacle::move(Texture& Texture)
     if( PosX < 0-WIDTH )
     {
         PosX =WIDTH+ (PosX + SCREEN_WIDTH + VelX) % SCREEN_WIDTH;
+        accelerate++;
     }
+    if( accelerate/6==1 ) {
+            int x=-1;
+            VelX=VelX+x;
+            x=0;
+            accelerate=0;
+    }
+
 
 }
 void Obstacle::Render(Texture& Texture,SDL_Renderer* Renderer)

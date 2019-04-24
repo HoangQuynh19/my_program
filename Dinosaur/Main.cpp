@@ -25,14 +25,14 @@ int main(int argc, char* args[])
     SDL_Event e;
     bool PlayAgain=true;
 
-    while(PlayAgain==true)
+    while( PlayAgain==true )
     {
         if( !loadMedia( Background, DINO, Cactus, Play, gameOver, DinoClips, Renderer ) ) return -1;
 
         Dino Dinosaur;
 
-        Obstacle Cactus1(SCREEN_WIDTH,POSY_BEGIN_CACTUS);
-        Obstacle Cactus2(SCREEN_WIDTH+SCREEN_WIDTH/2,POSY_BEGIN_CACTUS);
+        Obstacle Cactus1( SCREEN_WIDTH, POSY_BEGIN_CACTUS );
+        Obstacle Cactus2( SCREEN_WIDTH+SCREEN_WIDTH/2, POSY_BEGIN_CACTUS );
 
         int scrollingOffset = 0;
         int frame = 0;
@@ -52,14 +52,13 @@ int main(int argc, char* args[])
                 {
                     switch( e.key.keysym.sym )
                     {
-                        case SDLK_p:{ Play.free();break;}
+                        case SDLK_p:
+                        {
+                            Play.free();
+                            break;
+                        }
                     }
-                 /*   switch ( e.key.keysym.sym && endGame==true)
-                    {
-                         case SDLK_y:{PlayAgain=true;quit=true;break;}
-                         case SDLK_n:{PlayAgain=false;quit=true;break;}
-                    }
-                */GameOver(e, Dinosaur,Cactus1,Cactus2,Renderer,gameOver,PlayAgain,quit);
+                    GameOver( e, Dinosaur, Cactus1, Cactus2, Renderer, gameOver, PlayAgain, quit );
 
                 }
                 Cactus1.handleEvent(e);
@@ -74,9 +73,9 @@ int main(int argc, char* args[])
 
             SDL_RenderClear( Renderer );
 
-            endGame=GameOver(e, Dinosaur,Cactus1,Cactus2,Renderer,gameOver,PlayAgain,quit);
+            endGame=GameOver( e, Dinosaur,Cactus1,Cactus2,Renderer,gameOver,PlayAgain,quit );
 
-            RENDER(Background, DINO, Cactus, Play,gameOver, Dinosaur,Cactus1, Cactus2, DinoClips, scrollingOffset, frame,Renderer,endGame);
+            RENDER( Background, DINO, Cactus, Play,gameOver, Dinosaur,Cactus1, Cactus2, DinoClips, scrollingOffset, frame,Renderer,endGame );
             //Update Screen
             SDL_RenderPresent( Renderer );
 

@@ -1,5 +1,5 @@
-#ifndef TEXTURE_H_
-#define TEXTURE_H_
+#ifndef TEXTURE_H
+#define TEXTURE_H
 
 #include <SDL.h>
 #include <SDL_image.h>
@@ -31,4 +31,4 @@ class Texture
 		int mHeight;
 };
 
-#endif // TEXTURE_H_
+#endif // TEXTURE_H

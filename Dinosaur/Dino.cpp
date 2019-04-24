@@ -13,7 +13,7 @@ void Dino::handleEvent(SDL_Event& e, bool& press)
 {
     press=false;
     if( press==false ){
-        if( e.type == SDL_KEYDOWN &&PosY==POSY_BEGIN_DINO )
+        if( e.type == SDL_KEYDOWN && PosY==POSY_BEGIN_DINO )
         {
             switch( e.key.keysym.sym )
             {
