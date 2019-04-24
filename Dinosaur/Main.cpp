@@ -58,7 +58,11 @@ int main(int argc, char* args[])
                             break;
                         }
                     }
+<<<<<<< HEAD
                     GameOver( e, Dinosaur, Cactus1, Cactus2, Renderer, gameOver, PlayAgain, quit );
+=======
+                    GameOver(e, Dinosaur,Cactus1,Cactus2,Renderer,gameOver,PlayAgain,quit);
+>>>>>>> 43269556d6c2bcd6590a2a3c8e771f35e02df211
 
                 }
                 Cactus1.handleEvent(e);
