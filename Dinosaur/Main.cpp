@@ -54,12 +54,7 @@ int main(int argc, char* args[])
                     {
                         case SDLK_p:{ Play.free();break;}
                     }
-                 /*   switch ( e.key.keysym.sym && endGame==true)
-                    {
-                         case SDLK_y:{PlayAgain=true;quit=true;break;}
-                         case SDLK_n:{PlayAgain=false;quit=true;break;}
-                    }
-                */GameOver(e, Dinosaur,Cactus1,Cactus2,Renderer,gameOver,PlayAgain,quit);
+                    GameOver(e, Dinosaur,Cactus1,Cactus2,Renderer,gameOver,PlayAgain,quit);
 
                 }
                 Cactus1.handleEvent(e);
