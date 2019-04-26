@@ -5,8 +5,8 @@
 #include "Obstacle.h"
 #include "Dino.h"
 
-#define Lim_left 110
-#define Lim_right 50
+#define Lim_left 105
+#define Lim_right 43
 #define Lim_above 290
 
 bool GameOver( SDL_Event&e, Dino& Dino, Obstacle & Cactus1,Obstacle & Cactus2,

@@ -9,10 +9,10 @@ Dino::Dino()
     Sound_jump = Mix_LoadWAV( "medium.wav" );
 
 }
-void Dino::handleEvent(SDL_Event& e, bool& press)
+void Dino::handleEvent(SDL_Event& e, bool& endGame)
 {
-    press=false;
-    if( press==false ){
+    endGame=false;
+    if( endGame==false ){
         if( e.type == SDL_KEYDOWN && PosY==POSY_BEGIN_DINO )
         {
             switch( e.key.keysym.sym )
@@ -21,7 +21,7 @@ void Dino::handleEvent(SDL_Event& e, bool& press)
                     {
                         Mix_PlayChannel( -1, Sound_jump, 0 );
                         Altitude=HEIGHT;
-                        Gravity=GLAVITY;
+                        Gravity=GRAVITY;
                         break;
                     }
             }
@@ -42,9 +42,9 @@ void Dino::jump(int &frame)
     }
     else  frame=0;
 }
-void Dino::Render(Texture& Dino, SDL_Renderer* Renderer, SDL_Rect SpriteClips[4], int& frame)
+void Dino::Render(Texture& Dino, SDL_Renderer* Renderer, SDL_Rect SpriteClips[Animation_Frames], int& frame)
 {
-    SDL_Rect* currentClip = &SpriteClips[frame/4];
+    SDL_Rect* currentClip = &SpriteClips[frame/Animation_Frames];
 
     Dino.render( PosX, PosY, Renderer, currentClip );
 

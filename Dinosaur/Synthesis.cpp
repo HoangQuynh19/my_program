@@ -77,7 +77,7 @@ bool loadMedia( Texture& Background, Texture& DINO, Texture& Cactus, Texture& Pl
 	}
 
     if ( Play.loadTexture("Play.png",Renderer) == NULL ) success = false;
-    if ( gameOver.loadTexture("GameOver.jpg", Renderer) ==NULL ) success = false;
+    if ( gameOver.loadTexture("GameOver.jpg", Renderer) == NULL ) success = false;
     return success;
 }
 void RENDER( Texture& Background, Texture& DINO, Texture& Cactus, Texture& Play,Texture& gameOver, Dino& Dinosaur, Obstacle& Cactus1,Obstacle& Cactus2,

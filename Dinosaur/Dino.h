@@ -5,7 +5,8 @@
 #include <SDL_mixer.h>
 
 #define HEIGHT 21
-#define GLAVITY 1
+#define GRAVITY 1
+#define Animation_Frames 4
 
 class Dino
 {
@@ -20,11 +21,11 @@ public:
 
     Dino();
 
-    void handleEvent( SDL_Event&e, bool& press );
+    void handleEvent( SDL_Event& e, bool& endGame );
 
-    void jump(int &frame);
+    void jump(int& frame);
 
-    void Render(Texture& Dino, SDL_Renderer* Renderer, SDL_Rect SpriteClips[4], int& frame);
+    void Render(Texture& Dino, SDL_Renderer* Renderer, SDL_Rect SpriteClips[Animation_Frames], int& frame);
 
     int getPosX();
     int getPosy();

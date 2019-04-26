@@ -6,9 +6,7 @@ Obstacle::Obstacle(int x,int y)
     PosY = y;
 
     VelX = 0;
-    VELX_C=7;
-
-    accelerate=0;
+    VELX_C=6;
 
 }
 
@@ -41,18 +39,11 @@ void Obstacle::handleEvent( SDL_Event& e)
 void Obstacle::move(Texture& Texture)
 {
     PosX+=VelX;
-    if( PosX < 0-WIDTH )
+    if( PosX < 0-Texture.getWidth() )
     {
-        PosX =WIDTH+ (PosX + SCREEN_WIDTH + VelX) % SCREEN_WIDTH;
-        accelerate++;
-    }
-    if( accelerate/6==1 ) {
-            int x=-1;
-            VelX=VelX+x;
-            x=0;
-            accelerate=0;
-    }
+        PosX =Texture.getWidth()+ (PosX + SCREEN_WIDTH + VelX) % SCREEN_WIDTH;
 
+    }
 
 }
 void Obstacle::Render(Texture& Texture,SDL_Renderer* Renderer)

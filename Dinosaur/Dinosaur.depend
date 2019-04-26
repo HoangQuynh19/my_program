@@ -7,19 +7,18 @@
 	<SDL_image.h>
 	<string>
 
-1556092898 source:f:\dinosaur\dino.cpp
+1556243224 source:f:\dinosaur\dino.cpp
 	"Dino.h"
 
-1556093287 f:\dinosaur\dino.h
+1556266474 f:\dinosaur\dino.h
 	"Texture.h"
 	<SDL_mixer.h>
 
-1556092643 source:f:\dinosaur\obstacle.cpp
+1556262254 source:f:\dinosaur\obstacle.cpp
 	"Obstacle.h"
 
-1556093286 f:\dinosaur\obstacle.h
+1556262254 f:\dinosaur\obstacle.h
 	"Texture.h"
-	<iostream>
 
 1556092198 source:f:\dinosaur\main.cpp
 	"Dino.h"
@@ -28,7 +27,7 @@
 	"Texture.h"
 	"GameOver.h"
 
-1556090366 source:f:\dinosaur\synthesis.cpp
+1556267426 source:f:\dinosaur\synthesis.cpp
 	"Synthesis.h"
 
 1556092406 f:\dinosaur\synthesis.h
@@ -39,7 +38,7 @@
 1556076844 source:f:\dinosaur\gameover.cpp
 	"GameOver.h"
 
-1556092406 f:\dinosaur\gameover.h
+1556213450 f:\dinosaur\gameover.h
 	"Texture.h"
 	"Obstacle.h"
 	"Dino.h"
